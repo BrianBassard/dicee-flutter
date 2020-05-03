@@ -1,13 +1,18 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
   return runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Dice'),
-          backgroundColor: Colors.red,
+          centerTitle: true,
+          title: Text('Dice', style: TextStyle(
+            color: Colors.lightBlue
+          ),),
+          backgroundColor: Colors.white
         ),
         body: DicePage(),
       ),
@@ -15,27 +20,46 @@ void main() {
   );
 }
 
-class DicePage extends StatelessWidget {
+class DicePage extends StatefulWidget {
+  @override
+  _DicePageState createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+  int leftDiceNumber = 1;
+  int rightDiceNumber = 1;
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: FlatButton(
-                onPressed: () {
-                  print('left button got pressed');
-                }, child: Image.asset('images/dice1.png')),
-          ),
-          Expanded(
+    return Container(
+      child: Center(
+        child: Row(
+          children: <Widget>[
+            Expanded(
               child: FlatButton(
-                onPressed: () {
-                  print('Right button got pressed');
-                },
-            child: Image.asset('images/dice1.png'),
-          )),
-        ],
+                  onPressed: () {
+                    setState(() {
+                    });
+                    leftDiceNumber = Random().nextInt(6) + 1;
+                  }, child: Image.asset('images/dice$leftDiceNumber.png')),
+            ),
+            Expanded(
+                child: FlatButton(
+                  onPressed: () {
+                    print('Right button got pressed');
+                  },
+                  child: Image.asset('images/dice$rightDiceNumber.png'),
+                ),
+            ),
+          ],
+        ),
+      ),
+    );
+    Container(
+      child: Center(
+        child: Row(),
       ),
     );
   }
 }
+
