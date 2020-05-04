@@ -8,12 +8,12 @@ void main() {
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          centerTitle: true,
-          title: Text('Dice', style: TextStyle(
-            color: Colors.lightBlue
-          ),),
-          backgroundColor: Colors.white
-        ),
+            centerTitle: true,
+            title: Text(
+              'Dice',
+              style: TextStyle(color: Colors.lightBlue),
+            ),
+            backgroundColor: Colors.white),
         body: DicePage(),
       ),
     ),
@@ -29,6 +29,13 @@ class _DicePageState extends State<DicePage> {
   int leftDiceNumber = 1;
   int rightDiceNumber = 1;
 
+  void changeDiceFace() {
+    setState(() {
+      leftDiceNumber = Random().nextInt(6) + 1;
+      rightDiceNumber = Random().nextInt(6) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,28 +45,21 @@ class _DicePageState extends State<DicePage> {
             Expanded(
               child: FlatButton(
                   onPressed: () {
-                    setState(() {
-                    });
-                    leftDiceNumber = Random().nextInt(6) + 1;
-                  }, child: Image.asset('images/dice$leftDiceNumber.png')),
+                    changeDiceFace();
+                  },
+                  child: Image.asset('images/dice$leftDiceNumber.png')),
             ),
             Expanded(
-                child: FlatButton(
-                  onPressed: () {
-                    print('Right button got pressed');
-                  },
-                  child: Image.asset('images/dice$rightDiceNumber.png'),
-                ),
+              child: FlatButton(
+                onPressed: () {
+                  changeDiceFace();
+                },
+                child: Image.asset('images/dice$rightDiceNumber.png'),
+              ),
             ),
           ],
         ),
       ),
     );
-    Container(
-      child: Center(
-        child: Row(),
-      ),
-    );
   }
 }
-
